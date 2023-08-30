@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "arpeggio-py"
+version = "1.0.0"
+description = ""
+authors = ["Isaac Herrera <isaacdecoded@gmail.com>"]
+packages = [{include = "core"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pre-commit = "^3.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
