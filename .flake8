@@ -1,0 +1,8 @@
+[flake8]
+extend-ignore =
+    # Handled by black (whitespace before ':')
+    E203,
+    # Handled by black (line too long)
+    E501,
+exclude =
+    __init__.py

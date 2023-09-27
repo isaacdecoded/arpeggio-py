@@ -6,7 +6,7 @@ T = TypeVar("T")
 
 class ValueObject(Generic[T]):
     def __init__(self, value: T):
-        self.value: T = value
+        self.value = value
 
     def is_equal(self, vo: ValueObject[T]) -> bool:
         return self.value == vo.value

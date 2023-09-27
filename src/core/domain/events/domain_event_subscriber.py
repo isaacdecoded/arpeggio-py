@@ -1,8 +1,8 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from core.domain.events.domain_event import DomainEvent
 
 
-class DomainEventSubscriber:
+class DomainEventSubscriber(ABC):
     @abstractmethod
     def subscribed_to(self) -> list[str]:
         pass

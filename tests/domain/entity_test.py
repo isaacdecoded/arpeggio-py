@@ -1,11 +1,18 @@
 import datetime
-from core.domain.entities.entity import Entity
-from core.domain.entities.value_object import ValueObject
+from src.core.domain.entities.entity import Entity
+from src.core.domain.entities.identity_object import IdentityObject
+from src.core.domain.entities.date_object import DateObject
 
 
 def test_entity_instantiation_no_dates():
-    id = ValueObject("123")
-    entity = Entity(id)
+    id = IdentityObject("123")
+    entity = Entity(
+        {
+            "id": id,
+            "created_at": None,
+            "updated_at": None,
+        }
+    )
 
     assert entity.id.is_equal(id)
     assert isinstance(entity.created_at.value, datetime.datetime)
@@ -13,10 +20,16 @@ def test_entity_instantiation_no_dates():
 
 
 def test_entity_instantiation_with_dates():
-    id = ValueObject("123")
-    created_at = ValueObject(datetime.datetime.now())
-    updated_at = ValueObject(datetime.datetime.now())
-    entity = Entity(id, created_at, updated_at)
+    id = IdentityObject("123")
+    created_at = DateObject(datetime.datetime.now())
+    updated_at = DateObject(datetime.datetime.now())
+    entity = Entity(
+        {
+            "id": id,
+            "created_at": created_at,
+            "updated_at": updated_at,
+        }
+    )
 
     assert entity.id.is_equal(id)
     assert entity.created_at.is_equal(created_at)

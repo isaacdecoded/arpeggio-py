@@ -3,15 +3,19 @@ name = "arpeggio-py"
 version = "1.0.0"
 description = ""
 authors = ["Isaac Herrera <isaacdecoded@gmail.com>"]
-packages = [{include = "core"}]
+packages = [{ include = "core", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-
+asyncio = "^3.4.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
 pre-commit = "^3.3.3"
+mypy = "^1.5.1"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
 
 [build-system]
 requires = ["poetry-core"]
