@@ -17,11 +17,11 @@ class InMemoryEventBus(DomainEventBus):
 
     def add_subscribers(self, subscribers: list[DomainEventSubscriber]):
         for subscriber in subscribers:
-            for subscriber_domain_event_name in subscriber.subscribed_to():
-                if subscriber_domain_event_name not in self.subscribers:
-                    self.subscribers[subscriber_domain_event_name] = []
+            subscriber_domain_event_name = subscriber.subscribed_to()
+            if subscriber_domain_event_name not in self.subscribers:
+                self.subscribers[subscriber_domain_event_name] = []
 
-                self.subscribers[subscriber_domain_event_name].append(subscriber)
+            self.subscribers[subscriber_domain_event_name].append(subscriber)
 
     def start(self):
         pass

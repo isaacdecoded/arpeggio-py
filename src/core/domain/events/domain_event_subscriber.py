@@ -4,7 +4,7 @@ from core.domain.events.domain_event import DomainEvent
 
 class DomainEventSubscriber(ABC):
     @abstractmethod
-    def subscribed_to(self) -> list[str]:
+    def subscribed_to(self) -> str:
         pass
 
     @abstractmethod

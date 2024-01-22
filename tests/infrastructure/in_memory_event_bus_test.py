@@ -10,8 +10,8 @@ from src.core.domain.events.domain_event import DomainEvent
 class TestSubscriber(DomainEventSubscriber):
     onCallbackCalled = False
 
-    def subscribed_to(self) -> list[str]:
-        return ["TestDomainEvent"]
+    def subscribed_to(self) -> str:
+        return "TestDomainEvent"
 
     def on(self, domain_event: DomainEvent):
         self.onCallbackCalled = isinstance(domain_event, TestDomainEvent)

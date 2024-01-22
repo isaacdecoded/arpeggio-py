@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "arpeggio-py"
 version = "1.0.0"
-description = ""
-authors = ["Isaac Herrera <isaacdecoded@gmail.com>"]
+description = "Coding template for Clean Architecture, CQRS and DDD based projects"
+authors = ["Isaac Herrera"]
 packages = [{ include = "core", from = "src" }]
 
 [tool.poetry.dependencies]
@@ -10,9 +10,9 @@ python = "^3.11"
 asyncio = "^3.4.3"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.4.0"
-pre-commit = "^3.3.3"
-mypy = "^1.5.1"
+pytest = "^7.4.4"
+pre-commit = "^3.6.0"
+mypy = "^1.8.0"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

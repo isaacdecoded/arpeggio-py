@@ -6,5 +6,5 @@ T = TypeVar("T")
 
 class UseCaseInputPort(ABC, Generic[T]):
     @abstractmethod
-    async def interact(self, input_data: T):
+    async def interact(self, request_model: T):
         pass

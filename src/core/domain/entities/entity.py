@@ -5,7 +5,7 @@ from core.domain.entities.date_object import DateObject
 from core.domain.errors.invalid_argument_error import InvalidArgumentError
 
 
-class BaseProps(TypedDict):
+class EntityProps(TypedDict):
     id: IdentityObject
     created_at: Optional[DateObject]
     updated_at: Optional[DateObject]
@@ -18,7 +18,7 @@ class Entity:
 
     def __init__(
         self,
-        props: BaseProps,
+        props: EntityProps,
     ):
         created_at = props.get("created_at")
         self.id = props.get("id")

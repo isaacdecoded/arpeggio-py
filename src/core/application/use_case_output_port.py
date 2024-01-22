@@ -6,7 +6,7 @@ T = TypeVar("T")
 
 class UseCaseOutputPort(ABC, Generic[T]):
     @abstractmethod
-    def success(self, output_data: T):
+    def success(self, response_model: T):
         pass
 
     @abstractmethod
