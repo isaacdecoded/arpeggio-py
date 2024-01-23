@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic
 
-T = TypeVar("T")
+ViewModel = TypeVar("ViewModel")
 
 
-class View(ABC, Generic[T]):
+class View(ABC, Generic[ViewModel]):
     @abstractmethod
-    def transform(self, view_model: T):
+    async def transform(self, view_model: ViewModel):
         pass

@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic
 
-T = TypeVar("T")
+ResponseModel = TypeVar("ResponseModel")
 
 
-class UseCaseOutputPort(ABC, Generic[T]):
+class UseCaseOutputPort(ABC, Generic[ResponseModel]):
     @abstractmethod
-    def success(self, response_model: T):
+    def success(self, response_model: ResponseModel):
         pass
 
     @abstractmethod

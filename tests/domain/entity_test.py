@@ -14,7 +14,7 @@ def test_entity_instantiation_no_dates():
         }
     )
 
-    assert entity.id.is_equal(id)
+    assert entity.id.value == id.value
     assert isinstance(entity.created_at.value, datetime.datetime)
     assert entity.updated_at is None
 
@@ -31,6 +31,6 @@ def test_entity_instantiation_with_dates():
         }
     )
 
-    assert entity.id.is_equal(id)
-    assert entity.created_at.is_equal(created_at)
-    assert entity.updated_at is not None and entity.updated_at.is_equal(updated_at)
+    assert entity.id.value == id.value
+    assert entity.created_at.value == created_at.value
+    assert entity.updated_at is not None and entity.updated_at.value == updated_at.value

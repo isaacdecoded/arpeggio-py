@@ -24,4 +24,4 @@ class InMemoryEventBus(DomainEventBus):
             self.subscribers[subscriber_domain_event_name].append(subscriber)
 
     def start(self):
-        pass
+        print("InMemoryEventBus started.")
