@@ -14,16 +14,16 @@ class DeleteTodosPresenter(UseCaseOutputPort[DeleteTodoOutputData]):
     def __init__(self, view: View[DeleteTodosViewModel]):
         self.view = view
 
-    def success(self, output_data: DeleteTodoOutputData):
-        self.view.transform(
+    async def success(self, output_data: DeleteTodoOutputData):
+        await self.view.transform(
             {
                 "total_deleted": output_data.get("total_deleted"),
                 "error": None,
             }
         )
 
-    def failure(self, error: TodosNotDeletedError | BaseException):
-        self.view.transform(
+    async def failure(self, error: TodosNotDeletedError | BaseException):
+        await self.view.transform(
             {
                 "total_deleted": None,
                 "error": error,

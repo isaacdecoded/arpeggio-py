@@ -39,6 +39,6 @@ class CreateTodoUseCase(UseCaseInputPort[CreateTodoInputData]):
             )
             await self.todo_repository.save(todo)
             self.domain_event_bus.publish(todo.pull_domain_events())
-            self.output_port.success({"id": id})
+            await self.output_port.success({"id": id})
         except Exception as e:
-            self.output_port.failure(TodoNotSavedError(str(e)))
+            await self.output_port.failure(TodoNotSavedError(str(e)))

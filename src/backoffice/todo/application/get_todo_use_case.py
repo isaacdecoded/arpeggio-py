@@ -30,8 +30,8 @@ class GetTodoUseCase(UseCaseInputPort[GetTodoInputData]):
                 IdentityObject(id),
             )
             if todo is None:
-                return self.output_port.failure(TodoNotFoundError(id))
+                return await self.output_port.failure(TodoNotFoundError(id))
 
-            self.output_port.success({"todo": todo})
+            await self.output_port.success({"todo": todo})
         except Exception as e:
-            self.output_port.failure(TodoNotFoundError(id, str(e)))
+            await self.output_port.failure(TodoNotFoundError(id, str(e)))

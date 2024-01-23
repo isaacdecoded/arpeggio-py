@@ -3,7 +3,7 @@ from backoffice.todo.adapters.presenters import GetTodoViewModel
 
 
 class OnScreenGetTodoView(View[GetTodoViewModel]):
-    def transform(self, view_model: GetTodoViewModel):
+    async def transform(self, view_model: GetTodoViewModel):
         todo = view_model.get("todo")
         error = view_model.get("error")
         if error:

@@ -31,6 +31,6 @@ class DeleteTodoUseCase(UseCaseInputPort[DeleteTodoInputData]):
                 filters.append(Filter[Todo]("id", "=", id))
             criteria = Criteria[Todo](filters)
             total_deleted = await self.todo_repository.delete(criteria)
-            self.output_port.success({"total_deleted": total_deleted})
+            await self.output_port.success({"total_deleted": total_deleted})
         except Exception as e:
-            self.output_port.failure(TodosNotDeletedError(str(e)))
+            await self.output_port.failure(TodosNotDeletedError(str(e)))

@@ -15,16 +15,16 @@ class GetTodoPresenter(UseCaseOutputPort[GetTodoOutputData]):
     def __init__(self, view: View[GetTodoViewModel]):
         self.view = view
 
-    def success(self, output_data: GetTodoOutputData):
-        self.view.transform(
+    async def success(self, output_data: GetTodoOutputData):
+        await self.view.transform(
             {
                 "todo": output_data.get("todo"),
                 "error": None,
             }
         )
 
-    def failure(self, error: TodoNotFoundError | BaseException):
-        self.view.transform(
+    async def failure(self, error: TodoNotFoundError | BaseException):
+        await self.view.transform(
             {
                 "todo": None,
                 "error": error,

@@ -15,16 +15,16 @@ class FindTodosPresenter(UseCaseOutputPort[FindTodosOutputData]):
     def __init__(self, view: View[FindTodosViewModel]):
         self.view = view
 
-    def success(self, output_data: FindTodosOutputData):
-        self.view.transform(
+    async def success(self, output_data: FindTodosOutputData):
+        await self.view.transform(
             {
                 "todos": output_data.get("todos"),
                 "error": None,
             }
         )
 
-    def failure(self, error: TodosNotFoundError | BaseException):
-        self.view.transform(
+    async def failure(self, error: TodosNotFoundError | BaseException):
+        await self.view.transform(
             {
                 "todos": None,
                 "error": error,

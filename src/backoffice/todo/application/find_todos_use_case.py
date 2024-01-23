@@ -38,6 +38,6 @@ class FindTodosUseCase(UseCaseInputPort[FindTodosInputData]):
             if name:
                 criteria.filters.append(Filter("name", "contains", name))
             todos = await self.todo_repository.find(criteria)
-            self.output_port.success({"todos": todos})
+            await self.output_port.success({"todos": todos})
         except Exception as e:
-            self.output_port.failure(TodosNotFoundError(str(e)))
+            await self.output_port.failure(TodosNotFoundError(str(e)))

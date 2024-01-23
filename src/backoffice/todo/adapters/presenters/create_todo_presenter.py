@@ -6,7 +6,7 @@ from backoffice.todo.application import CreateTodoOutputData
 
 
 class CreateTodoViewModel(TypedDict):
-    id: str | None
+    id: str | int | None
     error: TodoNotSavedError | BaseException | None
 
 
@@ -14,17 +14,17 @@ class CreateTodoPresenter(UseCaseOutputPort[CreateTodoOutputData]):
     def __init__(self, view: View[CreateTodoViewModel]):
         self.view = view
 
-    def success(self, output_data: CreateTodoOutputData):
+    async def success(self, output_data: CreateTodoOutputData):
         id = output_data.get("id")
-        self.view.transform(
+        await self.view.transform(
             {
                 "id": id.value,
                 "error": None,
             }
         )
 
-    def failure(self, error: TodoNotSavedError | BaseException):
-        self.view.transform(
+    async def failure(self, error: TodoNotSavedError | BaseException):
+        await self.view.transform(
             {
                 "id": None,
                 "error": error,

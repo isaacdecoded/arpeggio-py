@@ -33,6 +33,6 @@ class UpdateTodoUseCase(UseCaseInputPort[UpdateTodoInputData]):
                 todo.update_name(TodoName(input_data.get("name")))
                 await self.todo_repository.save(todo)
 
-            self.output_port.success({"id": todo_id})
+            await self.output_port.success({"id": todo_id})
         except Exception as e:
-            self.output_port.failure(TodoNotSavedError(str(e)))
+            await self.output_port.failure(TodoNotSavedError(str(e)))
