@@ -6,9 +6,9 @@ ResponseModel = TypeVar("ResponseModel")
 
 class UseCaseOutputPort(ABC, Generic[ResponseModel]):
     @abstractmethod
-    def success(self, response_model: ResponseModel):
+    async def success(self, response_model: ResponseModel):
         pass
 
     @abstractmethod
-    def failure(self, error: BaseException):
+    async def failure(self, error: BaseException):
         pass

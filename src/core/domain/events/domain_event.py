@@ -1,14 +1,13 @@
-from abc import ABC, abstractmethod
-from core.domain.entities.value_object import ValueObject
-from core.domain.entities.identity_object import IdentityObject
-from core.domain.entities.date_object import DateObject
+import datetime
+from abc import ABCMeta
 
 
-class DomainEvent(ABC):
-    aggregate_id: IdentityObject
-    event_name: ValueObject[str]
-    occurring_time: DateObject
+class DomainEvent(metaclass=ABCMeta):
+    name: str
+    aggregate_root_id: str | int
+    occurring_time: datetime.datetime
 
-    @abstractmethod
-    def __init__(self, aggregate_id: IdentityObject):
-        pass
+    def __init__(self, name: str, aggregate_root_id: str | int):
+        self.name = name
+        self.aggregate_root_id = aggregate_root_id
+        self.occurring_time = datetime.datetime.now()

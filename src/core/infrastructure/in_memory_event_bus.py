@@ -8,20 +8,17 @@ class InMemoryEventBus(DomainEventBus):
             []
         )
 
-    def publish(self, domain_events: list[DomainEvent]):
+    async def publish(self, domain_events: list[DomainEvent]):
         for domain_event in domain_events:
-            if domain_event.event_name.value in self.subscribers:
-                subscribers = self.subscribers[domain_event.event_name.value]
+            if domain_event.name in self.subscribers:
+                subscribers = self.subscribers[domain_event.name]
                 for subscriber in subscribers:
-                    subscriber.on(domain_event)
+                    await subscriber.on(domain_event)
 
-    def add_subscribers(self, subscribers: list[DomainEventSubscriber]):
+    async def add_subscribers(self, subscribers: list[DomainEventSubscriber]):
         for subscriber in subscribers:
             subscriber_domain_event_name = subscriber.subscribed_to()
             if subscriber_domain_event_name not in self.subscribers:
                 self.subscribers[subscriber_domain_event_name] = []
 
             self.subscribers[subscriber_domain_event_name].append(subscriber)
-
-    def start(self):
-        print("InMemoryEventBus started.")

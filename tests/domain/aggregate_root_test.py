@@ -1,8 +1,6 @@
 import datetime
 from src.core.domain.entities.aggregate_root import AggregateRoot
-from src.core.domain.entities.value_object import ValueObject
 from src.core.domain.entities.identity_object import IdentityObject
-from src.core.domain.entities.date_object import DateObject
 from src.core.domain.events import DomainEvent
 
 
@@ -10,9 +8,9 @@ class TestDomainEvent(DomainEvent):
     __test__ = False
 
     def __init__(self):
-        self.aggregate_id = IdentityObject("id")
-        self.occurring_time = DateObject(datetime.datetime.now())
-        self.event_name = ValueObject("TestDomainEvent")
+        self.name = "TestDomainEvent"
+        self.aggregate_root_id = "id"
+        self.occurring_time = datetime.datetime.now()
 
 
 def test_aggregate_root_domain_events_pulling():

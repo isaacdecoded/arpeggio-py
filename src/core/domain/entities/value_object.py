@@ -1,9 +1,9 @@
-from __future__ import annotations
+from abc import ABC
 from typing import TypeVar, Generic
 
-T = TypeVar("T")
+Value = TypeVar("Value")
 
 
-class ValueObject(Generic[T]):
-    def __init__(self, value: T):
+class ValueObject(ABC, Generic[Value]):
+    def __init__(self, value: Value):
         self.value = value
