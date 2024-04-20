@@ -10,7 +10,9 @@ class AddTodoPresenter(UseCaseOutputPort[AddTodoResponseModel]):
 
     async def success(self, response_model: AddTodoResponseModel):
         id = response_model["todo_id"]
+        print("===")
         print(f"AddTodoPresenter: Todo with ID <{id}> successfully added.")
+        print("===")
         self.todo_id_catcher(id)
 
     async def failure(self, error: TodoNotAddedError | Exception):

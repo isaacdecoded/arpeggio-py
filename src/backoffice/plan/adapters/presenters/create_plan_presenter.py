@@ -10,7 +10,9 @@ class CreatePlanPresenter(UseCaseOutputPort[CreatePlanResponseModel]):
 
     async def success(self, response_model: CreatePlanResponseModel):
         id = response_model["plan_id"]
+        print("===")
         print(f"CreatePlanPresenter: Plan with ID <{id}> successfully added.")
+        print("===")
         self.plan_id_catcher(id)
 
     async def failure(self, error: PlanNotCreatedError | Exception):

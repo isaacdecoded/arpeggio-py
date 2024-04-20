@@ -1,11 +1,24 @@
 import asyncio
 from core.infrastructure.in_memory_domain_event_bus import InMemoryDomainEventBus
 from backoffice.backoffice_context import BackofficeContext
+from backoffice.plan.application.subscribers import (
+    SendNotificationOnPlanCreatedSubscriber,
+    SendNotificationOnPlanCompletedSubscriber,
+    SendNotificationOnTodoAddedSubscriber,
+)
+from backoffice.plan.infrastructure.services import OnScreenNotificationService
 
 
 async def main():
     # Setup DomainEventBus and Bounded Contexts
     in_memory_domain_event_bus = InMemoryDomainEventBus()
+    await in_memory_domain_event_bus.add_subscribers(
+        [
+            SendNotificationOnPlanCreatedSubscriber(OnScreenNotificationService()),
+            SendNotificationOnPlanCompletedSubscriber(OnScreenNotificationService()),
+            SendNotificationOnTodoAddedSubscriber(OnScreenNotificationService()),
+        ]
+    )
     backoffice_context = BackofficeContext(in_memory_domain_event_bus)
 
     # Run controllers

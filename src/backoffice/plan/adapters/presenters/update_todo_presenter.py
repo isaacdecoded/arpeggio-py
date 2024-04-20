@@ -6,7 +6,9 @@ from backoffice.plan.application.errors import TodoNotUpdatedError
 class UpdateTodoPresenter(UseCaseOutputPort[UpdateTodoResponseModel]):
     async def success(self, response_model: UpdateTodoResponseModel):
         id = response_model["todo_id"]
+        print("===")
         print(f"UpdateTodoPresenter: Todo with ID <{id}> successfully updated.")
+        print("===")
 
     async def failure(self, error: TodoNotUpdatedError | Exception):
         print(error)

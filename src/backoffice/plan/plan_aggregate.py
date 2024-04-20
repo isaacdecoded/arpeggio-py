@@ -25,17 +25,11 @@ from backoffice.plan.application.commands import (
     CheckTodoUseCase,
 )
 from backoffice.plan.application.queries import FindPlansUseCase, GetPlanUseCase
-from backoffice.plan.application.subscribers import (
-    SendNotificationOnPlanCreatedSubscriber,
-    SendNotificationOnPlanCompletedSubscriber,
-    SendNotificationOnTodoAddedSubscriber,
-)
 from backoffice.plan.infrastructure.repositories import (
     InMemoryFindPlansRepository,
     InMemoryGetPlanRepository,
     InMemoryPlanRepository,
 )
-from backoffice.plan.infrastructure.services import OnScreenNotificationService
 
 
 class PlanAggregate:
@@ -73,15 +67,4 @@ class PlanAggregate:
             CheckTodoUseCase(
                 InMemoryPlanRepository(), domain_event_bus, CheckTodoPresenter()
             )
-        )
-
-    async def prepare(self, domain_event_bus: DomainEventBus):
-        await domain_event_bus.add_subscribers(
-            [
-                SendNotificationOnPlanCreatedSubscriber(OnScreenNotificationService()),
-                SendNotificationOnPlanCompletedSubscriber(
-                    OnScreenNotificationService()
-                ),
-                SendNotificationOnTodoAddedSubscriber(OnScreenNotificationService()),
-            ]
         )

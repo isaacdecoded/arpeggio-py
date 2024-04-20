@@ -5,6 +5,7 @@ from backoffice.plan.application.errors import PlansNotFoundError
 
 class FindPlansPresenter(UseCaseOutputPort[FindPlansResponseModel]):
     async def success(self, response_model: FindPlansResponseModel):
+        print("===")
         print("FindPlansPresenter: Found plans:")
         for plan in response_model["plans"]:
             print("Name:", plan["name"])
@@ -14,6 +15,7 @@ class FindPlansPresenter(UseCaseOutputPort[FindPlansResponseModel]):
                 "Updated at:",
                 (plan["updated_at"].isoformat() if plan["updated_at"] else None),
             )
+        print("===")
 
     async def failure(self, error: PlansNotFoundError | Exception):
         print(error)
