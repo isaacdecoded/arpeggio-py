@@ -9,9 +9,9 @@ from core.domain.events import (
 
 class InMemoryDomainEventBus(DomainEventBus):
     def __init__(self):
-        self.subscribers: OrderedDict[
-            str, list[DomainEventSubscriber[DomainEvent]]
-        ] = OrderedDict([])
+        self.subscribers: OrderedDict[str, list[DomainEventSubscriber[DomainEvent]]] = (
+            OrderedDict([])
+        )
 
     async def publish(self, domain_events: list[DomainEvent]):
         for domain_event in domain_events:
