@@ -1,6 +1,5 @@
 import datetime
-from src.core.domain.entities.aggregate_root import AggregateRoot
-from src.core.domain.entities.identity_object import IdentityObject
+from src.core.domain.models import AggregateRoot, IdentityObject, DateObject
 from src.core.domain.events import DomainEvent
 
 
@@ -15,10 +14,11 @@ class TestDomainEvent(DomainEvent):
 
 def test_aggregate_root_domain_events_pulling():
     id = IdentityObject("123")
+    date = DateObject(datetime.datetime.now())
     aggregate_root = AggregateRoot(
         {
             "id": id,
-            "created_at": None,
+            "created_at": date,
             "updated_at": None,
         }
     )

@@ -1,13 +1,12 @@
+from abc import ABC
 import datetime
-from typing import TypeVar, Generic, Literal
-
-T = TypeVar("T")
+from typing import Literal
 
 FilterOperator = Literal["=", "!=", ">", "<", "contains", "not_contains"]
 SortOrder = Literal["asc", "desc"]
 
 
-class Filter(Generic[T]):
+class Filter(ABC):
     def __init__(
         self,
         field: str,
@@ -19,20 +18,20 @@ class Filter(Generic[T]):
         self.value = value
 
 
-class Sort(Generic[T]):
+class Sort:
     def __init__(self, field: str, order: SortOrder):
         self.field = field
         self.order = order
 
 
-class Criteria(Generic[T]):
+class Criteria(ABC):
     def __init__(
         self,
-        filters: list[Filter[T]],
+        filters: list[Filter],
         selection: list[str] | None = None,
         limit: int | None = None,
         offset: int | None = None,
-        sort: Sort[T] | None = None,
+        sort: Sort | None = None,
     ):
         self.filters = filters
         self.selection = selection

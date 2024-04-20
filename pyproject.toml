@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "arpeggio-py"
 version = "1.0.0"
-description = "Coding template for Clean Architecture, CQRS and DDD based projects"
-authors = ["Isaac Herrera"]
+description = "Coding template for DDD and Clean Architecture based projects"
+authors = ["Isaac Herrera <isaacdecoded@gmail.com>"]
 packages = [{ include = "core", from = "src" }]
 
 [tool.poetry.dependencies]

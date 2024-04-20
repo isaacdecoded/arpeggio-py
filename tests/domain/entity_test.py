@@ -1,15 +1,14 @@
 import datetime
-from src.core.domain.entities.entity import Entity
-from src.core.domain.entities.identity_object import IdentityObject
-from src.core.domain.entities.date_object import DateObject
+from src.core.domain.models import Entity, IdentityObject, DateObject
 
 
 def test_entity_instantiation_no_dates():
     id = IdentityObject("123")
+    date = DateObject(datetime.datetime.now())
     entity = Entity(
         {
             "id": id,
-            "created_at": None,
+            "created_at": date,
             "updated_at": None,
         }
     )

@@ -1,4 +1,4 @@
-from src.core.domain.entities.value_object import ValueObject
+from src.core.domain.models.value_object import ValueObject
 
 
 def test_value_object_instantiation():

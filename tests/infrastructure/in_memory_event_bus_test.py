@@ -1,10 +1,10 @@
 import pytest
 import datetime
-from src.core.infrastructure.in_memory_event_bus import InMemoryEventBus
+from core.infrastructure import InMemoryDomainEventBus
 from src.core.domain.events import DomainEvent, DomainEventSubscriber
 
 
-class TestSubscriber(DomainEventSubscriber):
+class TestSubscriber(DomainEventSubscriber[DomainEvent]):
     onCallbackCalled = False
 
     def subscribed_to(self) -> str:
@@ -25,7 +25,7 @@ class TestDomainEvent(DomainEvent):
 
 @pytest.mark.asyncio
 async def test_in_memory_event_bus_subscription_and_publish():
-    in_memory_event_bus = InMemoryEventBus()
+    in_memory_event_bus = InMemoryDomainEventBus()
     domain_event_subscriber = TestSubscriber()
     domain_event = TestDomainEvent()
     await in_memory_event_bus.add_subscribers([domain_event_subscriber])

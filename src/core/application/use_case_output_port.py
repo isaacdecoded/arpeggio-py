@@ -10,5 +10,5 @@ class UseCaseOutputPort(ABC, Generic[ResponseModel]):
         pass
 
     @abstractmethod
-    async def failure(self, error: BaseException):
+    async def failure(self, error: Exception):
         pass

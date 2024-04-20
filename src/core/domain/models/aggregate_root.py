@@ -1,9 +1,13 @@
 from abc import ABC
-from core.domain.entities.entity import Entity
+from typing import TypeVar, Generic
+from core.domain.models.entity import Entity
 from core.domain.events.domain_event import DomainEvent
+from core.domain.models.value_object import ValueObject
+
+Id = TypeVar("Id", bound=ValueObject[str])
 
 
-class AggregateRoot(Entity, ABC):
+class AggregateRoot(Generic[Id], Entity[Id], ABC):
     domain_events: list[DomainEvent] = []
 
     def pull_domain_events(self) -> list[DomainEvent]:
