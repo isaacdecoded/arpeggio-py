@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="../misc/0-Arpeggio-on-Python.png" loading="lazy"/>
+  <img src="https://github.com/isaacdecoded/arpeggio/blob/main/misc/0-Arpeggio-on-Python.png" loading="lazy"/>
 </p>
 
 # ARPEGGIO ON PYTHON
