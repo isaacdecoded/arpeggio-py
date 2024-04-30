@@ -1,15 +1,18 @@
 from abc import ABC
 import datetime
-from typing import Literal
+from typing import Literal, Optional, TypeVar, Generic
+from enum import Enum
 
-FilterOperator = Literal["=", "!=", ">", "<", "contains", "not_contains"]
+Enum = TypeVar("Enum", bound=Enum)
+
+FilterOperator = Literal["=", "!=", ">", "<", ">=", "<=", "contains", "not_contains"]
 SortOrder = Literal["asc", "desc"]
 
 
-class Filter(ABC):
+class Filter(Generic[Enum], ABC):
     def __init__(
         self,
-        field: str,
+        field: Enum,
         operator: FilterOperator,
         value: int | str | bool | datetime.datetime,
     ):
@@ -18,23 +21,26 @@ class Filter(ABC):
         self.value = value
 
 
-class Sort:
-    def __init__(self, field: str, order: SortOrder):
+class Sort(Generic[Enum]):
+    def __init__(self, field: Enum, order: SortOrder):
         self.field = field
         self.order = order
 
 
-class Criteria(ABC):
+class Criteria(
+    ABC,
+    Generic[Enum],
+):
     def __init__(
         self,
-        filters: list[Filter],
-        selection: list[str] | None = None,
-        limit: int | None = None,
-        offset: int | None = None,
-        sort: Sort | None = None,
+        filters: list[Filter[Enum]],
+        selections: Optional[list[Enum]] = None,
+        sorts: Optional[list[Sort[Enum]]] = None,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
     ):
         self.filters = filters
-        self.selection = selection
+        self.selections = selections
+        self.sorts = sorts
         self.limit = limit
         self.offset = offset
-        self.sort = sort
