@@ -2,8 +2,12 @@ from typing import Optional, List, TypedDict
 from datetime import datetime
 
 from core.application.use_case_output_port import UseCaseOutputPort
-from core.domain.repositories.criteria import Criteria, Filter, Sort
+from core.domain.repositories.criteria import Filter
 from backoffice.plan.domain.repositories import FindPlansRepository
+from backoffice.plan.domain.repositories.criteria import (
+    FindPlansCriteria,
+    PlanFieldEnum,
+)
 from backoffice.plan.application.errors import PlansNotFoundError
 
 
@@ -36,18 +40,14 @@ class FindPlansUseCase:
 
     async def interact(self, request_model: RequestModel) -> None:
         try:
-            criteria = Criteria(
+            criteria = FindPlansCriteria(
                 filters=[],
-                selection=["name"],
                 limit=request_model["limit"],
                 offset=request_model["offset"],
-                sort=Sort("created_at", "desc"),
             )
-            criteria.selection = ["name"]
-
             if request_model["name"]:
                 criteria.filters.append(
-                    Filter("name", "contains", request_model["name"])
+                    Filter(PlanFieldEnum.NAME, "contains", request_model["name"])
                 )
 
             plans = await self.plan_repository.find(criteria)
